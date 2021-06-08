@@ -18,17 +18,17 @@ export class UserService {
     }
 
     checkIfUserExist(email: string) {
-        const user = this.users.filter((item) => {
-            return item.email === email;
-        })
+        // const user = this.users.filter((item) => {
+        //     return item.email === email;
+        // })
+        const user = this.users.find(item => item.email === email)
         console.log(user);
         const checkUser = new CheckUser();
-        if(!user.length) {
+        if(!user) {
             checkUser.isExists = false;
-        } else {
-            checkUser.isExists = true;
-        }
-        
+            return checkUser;
+        } 
+        checkUser.isExists = true;
         return checkUser;
     }
 
