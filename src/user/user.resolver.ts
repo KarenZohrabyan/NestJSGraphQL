@@ -1,6 +1,6 @@
 import { Resolver, Query, Args, Mutation } from "@nestjs/graphql";
 import { CreateUserDto } from "./input/create-user.dto";
-import { User } from "./models/user.model.type";
+import { CheckUser, User } from "./models/user.model.type";
 import { GetUserDto } from "./output/get-user.dto";
 import { UserService } from "./user.service";
 
@@ -18,6 +18,11 @@ export class UserResolver {
     @Query(() => User)
     AAAAA(@Args('id') email: number, @Args('name') name: string) {
         return {email, name}
+    }
+
+    @Query(() => CheckUser)
+    checkIfUserExist(@Args('email') email: string) {
+        return this.userService.checkIfUserExist(email);
     }
 
     @Mutation(() => User)

@@ -7,9 +7,14 @@ type User {
   email: String!
 }
 
+type CheckUser {
+  isExists: Boolean!
+}
+
 type Query {
   getUser(getUser: GetUserDto!): User!
   AAAAA(name: String!, id: Float!): User!
+  checkIfUserExist(email: String!): CheckUser!
 }
 
 input GetUserDto {

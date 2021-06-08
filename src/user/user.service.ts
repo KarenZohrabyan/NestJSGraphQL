@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { CreateUserDto } from "./input/create-user.dto";
-import { User } from "./models/user.model.type";
+import { CheckUser, User } from "./models/user.model.type";
 import { GetUserDto } from "./output/get-user.dto";
 
 @Injectable()
@@ -15,6 +15,21 @@ export class UserService {
             throw new BadRequestException('There is no user with that email');
         }
         return user;
+    }
+
+    checkIfUserExist(email: string) {
+        const user = this.users.filter((item) => {
+            return item.email === email;
+        })
+        console.log(user);
+        const checkUser = new CheckUser();
+        if(!user.length) {
+            checkUser.isExists = false;
+        } else {
+            checkUser.isExists = true;
+        }
+        
+        return checkUser;
     }
 
     createUser(createUserDto: CreateUserDto) {

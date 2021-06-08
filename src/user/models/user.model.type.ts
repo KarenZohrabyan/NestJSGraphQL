@@ -8,3 +8,9 @@ export class User {
     @Field()
     email: string;
 }
+
+@ObjectType()
+export class CheckUser {
+    @Field()
+    isExists: boolean;
+}
